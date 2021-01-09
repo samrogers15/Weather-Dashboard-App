@@ -13,52 +13,93 @@
         <span class="navbar-brand mb-0 h1">Weather Dashboard</span>    
     </nav>
 
-    <div class="container">
+    <div class="container-fluid">
         <div class="row">
-            <div class="col-4 bg-light search">
-                <p>Search for a city!</p>
-                <div>
-                    <input class="form-control mr-sm-2" type="search" id="search-input" placeholder="Enter a city name" aria-label="Search">
-                    <div id="search-history">
-                        <button type="button" class="btn btn-secondary" id="search">Search</button>
-                        <button type="button" class="btn btn-secondary" id="clear">Clear Search</button>
+            <div class="col-md-3 pl-2">
+                <div class="card bg-light">
+                    <div class="card-body">
+                        <h3>Search for a city!</h3>
+                        <form class="form-inline">
+                            <div class="form-group">
+                                <input class="form-control" type="search" id="search-input" placeholder="Enter a city name">
+                            </div>
+                            <br>
+                            <button type="button" class="btn btn-secondary" id="search">Search</button>
+                            <button type="button" class="btn btn-secondary" id="clear">Clear Search</button>
+                        </form>
                     </div>
                 </div>
+                <div>
+                    <ul class="list-group bg-light" id="searched-cities"></ul>
+                </div>
             </div>
-            <div class="col-8 bg-light">
-                <div class="row mr-0 weather-info">
-                    <div class="col-12">
-                        <div class="row">
-                            <div class="col-12">
-                                <span id="city"></span>
-                                <img id="weather-img" src="" alt="">
-                            </div>
-                            <div class="col-12">
-                                <p id="temp"></p>
-                            </div>
-                            <div class="col-12">
-                                <p id="humidity"></p>
-                            </div>
-                            <div class="col-12">
-                                <p id="speed"></p>
-                            </div>
-                            <div class="col-12">
-                                <p id="uv-index"></p>
-                            </div>
+            <div class="col-md-9 bg-light">
+                <div class="card" id="current-weather">
+                    <div class="card-body">
+                        <div id="city-name">
+                            <h3 id="current-city-name"></h3>
                         </div>
+                        <div class="card-text">
+                            <img id="weather-img" src="" alt="">
+                        </div>
+                        <div class="card-text" id="weather-img"></div>
+                        <div class="card-text" id="temp"></div>
+                        <div class="card-text" id="humidity"></div>
+                        <div class="card-text" id="speed"></div>
+                        <div class="card-text" id="uv-index"></div>
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-12">
-                        <p id="forecast">5 Day Forecast</p>
+                    <div class="col-md-9" id="future-weather">
+                        <h3 id="forecast">5 Day Forecast</h3>
+                        <div id="future-weather2">
+                            <div class="card">
+                                <div class="card-body" id="day1">
+                                    <span class="card-title" id="future-date1"></span>
+                                    <img id="future-weather1" src="" alt="">
+                                    <div class="card-text" id="future-maxtemp1"></div>
+                                    <div class="card-text" id="future-mintemp1"></div>
+                                    <div class="card-text" id="future-humidity1"></div>
+                                </div>
+                            </div>
+                            <div class="card">
+                                <div class="card-body" id="day2">
+                                    <span class="card-title" id="future-date2"></span>
+                                    <img id="future-weather1" src="" alt="">
+                                    <div class="card-text" id="future-maxtemp2"></div>
+                                    <div class="card-text" id="future-mintemp2"></div>
+                                    <div class="card-text" id="future-humidity2"></div>
+                                </div>
+                            </div>
+                            <div class="card">
+                                <div class="card-body" id="day3">
+                                    <span class="card-title" id="future-date3"></span>
+                                    <img id="future-weather1" src="" alt="">
+                                    <div class="card-text" id="future-maxtemp3"></div>
+                                    <div class="card-text" id="future-mintemp3"></div>
+                                    <div class="card-text" id="future-humidity3"></div>
+                                </div>
+                            </div>
+                            <div class="card">
+                                <div class="card-body" id="day4">
+                                    <span class="card-title" id="future-date4"></span>
+                                    <img id="future-weather1" src="" alt="">
+                                    <div class="card-text" id="future-maxtemp4"></div>
+                                    <div class="card-text" id="future-mintemp4"></div>
+                                    <div class="card-text" id="future-humidity4"></div>
+                                </div>
+                            </div>
+                            <div class="card">
+                                <div class="card-body" id="day5">
+                                    <span class="card-title" id="future-date5"></span>
+                                    <img id="future-weather1" src="" alt="">
+                                    <div class="card-text" id="future-maxtemp5"></div>
+                                    <div class="card-text" id="future-mintemp5"></div>
+                                    <div class="card-text" id="future-humidity5"></div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                </div>
-                <div class="row five-day-forecast">
-                    <div class="col bg-primary ml-3 mb-3 rounded"></div>
-                    <div class="col bg-primary ml-3 mb-3 rounded"></div>
-                    <div class="col bg-primary ml-3 mb-3 rounded"></div>
-                    <div class="col bg-primary ml-3 mb-3 rounded"></div>
-                    <div class="col bg-primary ml-3 mb-3 rounded"></div>
                 </div>
             </div>
         </div>
@@ -66,6 +107,7 @@
 
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
     <script src="script.js"></script>
     
 </body>

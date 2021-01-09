@@ -10,12 +10,14 @@ function getWeatherInfo(city) {
         .then(function(response){
             console.log(response);
 
-            var [month, date, year] = new Date().toLocaleDateString('en-US').split('/');
-            console.log(month, date, year);
-            $('#city').html('<h1>' + response.name + ' Weather Details for ' + [month + '/' + date + '/' + year] +'</h1>');
+            var currentDate = moment().format('M/D/YYYY');
+            $('#current-city-name').html('<h1>' + response.name + ' Weather Details for ' + currentDate +'</h1>');
+            var forecastPic = response.weather[0].icon;
+            $('#weather-img').attr('src', 'https://openweathermap.org/img/w/' + forecastPic + '.png');
             var tempF = (response.main.temp - 273.15) * 1.80 + 32;
             $('#temp').text('Temperature: ' + tempF.toFixed(0) + '\u00B0 Fahrenheit');
             $('#humidity').text('Humidity: ' + response.main.humidity + '%');
+            $('#speed').text('Wind Speed ' + response.wind.speed + ' mph');
             
             var lat = response.coord.lat;
             var lon = response.coord.lon;
@@ -31,9 +33,15 @@ function getWeatherInfo(city) {
 
                     var UVI = response.current.uvi;
                     $('#uv-index').text('UV Index: ' + UVI);
-                });
-    
 
+                    for (let i = 0; i < 6; i++) {
+                        var date = moment().add(i+1, 'days').format('M/D/YYYY');
+                        var dailyForecastPic = response.daily[i].weather[0].icon;
+                        var dailyMaxTemp = ((response.daily[i].temp.max - 273.15) * 1.80 + 32).toFixed(0);
+                        var dailyMinTemp = ((response.daily[i].temp.min - 273.15) * 1.80 + 32).toFixed(0);
+                        var dailyHumidity = response.daily[i].humidity;
+                    };
+            });
         });
     
     
@@ -43,6 +51,3 @@ function getWeatherInfo(city) {
 
 
 getWeatherInfo('Portland');
-
-// const city = $('#search-input').val();
-// $('#search').on('click', getWeatherInfo(city));
