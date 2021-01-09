@@ -4,6 +4,11 @@
     font-size: 50px;
 }
 
+.search {
+    border: 1px solid black;
+    border-radius: 5px;
+}
+
 .weather-info {
     border: 1px solid black;
     border-radius: 5px;
