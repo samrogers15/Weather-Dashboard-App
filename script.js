@@ -1,6 +1,6 @@
 function getWeatherInfo(city) {
 
-    $('#forecast-container').hide();
+    // $('#forecast-container').hide();
 
     var APIKey = 'fd8f466eccd599a5426718b131296a81';
 
@@ -43,7 +43,7 @@ function getWeatherInfo(city) {
 
             var UVI = response.current.uvi;
             $('#uv-index').text('UV Index: ' + UVI);
-
+            
             for (let i = 1; i < 6; i++) {
                 const card = $('<div>').attr('class', 'card');
                 const cardBody = $('<div>').attr('class', 'card-body');
@@ -52,8 +52,6 @@ function getWeatherInfo(city) {
                 const dailyMaxTemp = $('<div>').attr('class', 'card-text').html('High: ' + ((response.daily[i].temp.max - 273.15) * 1.80 + 32).toFixed(0) + '\u00B0 F');
                 const dailyMinTemp = $('<div>').attr('class', 'card-text').html('Low: ' + ((response.daily[i].temp.min - 273.15) * 1.80 + 32).toFixed(0) + '\u00B0 F');
                 const dailyHumidity = $('<div>').attr('class', 'card-text').html('Humidity: ' + response.daily[i].humidity);
-
-                cardBody.empty();
 
                 $('#future-weather2').append(card);
                 card.append(cardBody);
@@ -73,9 +71,11 @@ searchButton.on('click', function(event){
     event.preventDefault();
     const citySearch = $('#search-input').val();
     getWeatherInfo(citySearch);
-    $('#forecast-container').show();
+    // $('#forecast-container').show();
 });
 
 // why does it not work as running the getWeatherInfo as the click function? as in:
 
 // searchButton.on('click', getWeatherInfo())
+
+// where do I empty the cardbody???
