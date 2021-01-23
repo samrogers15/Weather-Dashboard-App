@@ -1,4 +1,6 @@
-function getWeatherInfo(city) {
+function getWeatherInfo() {
+
+    const city = $('#search-input').val();
 
     // $('#forecast-container').hide();
 
@@ -67,15 +69,15 @@ function getWeatherInfo(city) {
 
 const searchButton = $('#search');
 
-searchButton.on('click', function(event){
-    event.preventDefault();
-    const citySearch = $('#search-input').val();
-    getWeatherInfo(citySearch);
-    // $('#forecast-container').show();
-});
+// searchButton.on('click', function Frank(event){
+//     event.preventDefault();
+//     const citySearch = $('#search-input').val();
+//     getWeatherInfo(citySearch);
+//     // $('#forecast-container').show();
+// });
 
 // why does it not work as running the getWeatherInfo as the click function? as in:
 
-// searchButton.on('click', getWeatherInfo())
+searchButton.on('click', getWeatherInfo)
 
 // where do I empty the cardbody???
