@@ -40,4 +40,4 @@ Created by Sam Rogers
 
 [Portfolio](https://samrogers15.github.io/Current_Portfolio/index.html)
 
-Feel free to contact me!
+Feel free to contact me! 
