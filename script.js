@@ -1,7 +1,10 @@
+// Calling the render local storage function to display previous searches stored in local storage.
 renderLocalStorage();
 
+// Calling the load page weather function to display the weather info for the most recent searched city (if there is any)
 loadPageWeather();
 
+// This function houses the ajax calls to the open weather API to retrieve all of the weather information and appends all of that weather information to the html page in the correct areas.
 function getWeatherInfo(city) {
 
     console.log('Load Page Weather function is working', city);
@@ -75,6 +78,7 @@ function getWeatherInfo(city) {
     });
 };
 
+// This function sets the local storage array and concatenates additional search terms into that array.
 function setLocalStorage(name, data) {
     var oldSearch = localStorage.getItem(name);
     if (oldSearch === null) {
@@ -85,6 +89,7 @@ function setLocalStorage(name, data) {
     localStorage.setItem(name, JSON.stringify(oldSearch.concat(data)));    
 };
 
+// This function renders the previously searched terms from local storage onto the page and makes a button that enables the previously searched city to show weather information for it again.
 function renderLocalStorage() {
     var storedSearches = JSON.parse(localStorage.getItem('previousSearches'));
     $('#searched-cities').empty()
@@ -98,10 +103,12 @@ function renderLocalStorage() {
     };
 };
 
+// This function clears the local storage for the 'previousSearches' key
 function clearLocalStorage() {
     localStorage.removeItem('previousSearches');
 };
 
+// This function loads the weather information for the last searched city if there is a record of previously searched cities in the users local storage
 function loadPageWeather() {
     var storedSearches = JSON.parse(localStorage.getItem('previousSearches'));
     if (storedSearches === null) {
@@ -115,7 +122,7 @@ function loadPageWeather() {
     }
 };
 
-
+// This onclick function calls the getWeatherInfo, setLocalStorage, and renderLocalStorage functions when the search button is clicked.
 $('#search').on('click', function searchWeather(event){
     event.preventDefault();
     const citySearch = $('#search-input').val();
@@ -128,6 +135,7 @@ $('#search').on('click', function searchWeather(event){
     };
 });
 
+// This onclick function calls the clearLocalStorage and renderLocalStorage functions when the clear search button is clicked.
 $('#clear').on('click', function clearSearchItems(event){
     event.preventDefault();
     clearLocalStorage();
