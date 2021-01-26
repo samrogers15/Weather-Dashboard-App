@@ -1,8 +1,10 @@
-function getWeatherInfo() {
+$('.forecast-container').hide();
 
-    const city = $('#search-input').val();
+function getWeatherInfo(city) {
 
-    // $('#forecast-container').hide();
+    $('.forecast-container').show();
+    
+    $('#future-weather2').empty();
 
     var APIKey = 'fd8f466eccd599a5426718b131296a81';
 
@@ -67,17 +69,44 @@ function getWeatherInfo() {
     });
 };
 
-const searchButton = $('#search');
+function setLocalStorage(name, data) {
+    var oldSearch = localStorage.getItem(name);
+    if (oldSearch === null) {
+        oldSearch = [];
+    } else {
+        oldSearch = JSON.parse(oldSearch);
+    }
+    localStorage.setItem(name, JSON.stringify(oldSearch.concat(data)));    
+};
 
-// searchButton.on('click', function Frank(event){
-//     event.preventDefault();
-//     const citySearch = $('#search-input').val();
-//     getWeatherInfo(citySearch);
-//     // $('#forecast-container').show();
-// });
+function renderLocalStorage() {
+    $('#searched-cities').empty();
+    var storedSearches = JSON.parse(localStorage.getItem('previousSearches'));
+    storedSearches.forEach((city) => {
+        var searchList = $('<li>').text(city);
+        console.log(searchList);
+        $('#searched-cities').append(searchList);
+    })    
+};
 
-// why does it not work as running the getWeatherInfo as the click function? as in:
+function clearLocalStorage() {
+    localStorage.removeItem('previousSearches');
+};
 
-searchButton.on('click', getWeatherInfo)
 
-// where do I empty the cardbody???
+$('#search').on('click', function searchWeather(event){
+    event.preventDefault();
+    const citySearch = $('#search-input').val();
+    if (citySearch === '') {
+        alert('Please enter a search value');
+    } else {
+    getWeatherInfo(citySearch);
+    setLocalStorage('previousSearches', citySearch);
+    renderLocalStorage();
+    }
+});
+
+$('#clear').on('click', function clearSearchItems(event){
+    event.preventDefault();
+    clearLocalStorage();
+});
