@@ -92,7 +92,7 @@ function renderLocalStorage() {
         return;
     } else {
         storedSearches.reverse().forEach((city) => {
-            var searchList = $('<button>').attr('class', 'cityButton').click(function() {getWeatherInfo(city)}).text(city);
+            var searchList = $('<button>').attr('class', 'cityButton btn btn-outline-secondary').click(function() {getWeatherInfo(city)}).text(city);
             $('#searched-cities').append(searchList);
         })
     };
@@ -106,6 +106,7 @@ function loadPageWeather() {
     var storedSearches = JSON.parse(localStorage.getItem('previousSearches'));
     if (storedSearches === null) {
         $('.forecast-container').hide();
+        $('#previous-city-list').hide();
         return;
     } else {
         var storedSearchesReverse = storedSearches.reverse();
