@@ -1,8 +1,14 @@
-$('.forecast-container').hide();
+renderLocalStorage();
+
+loadPageWeather();
 
 function getWeatherInfo(city) {
 
+    console.log('Load Page Weather function is working', city);
+
     $('.forecast-container').show();
+
+    $('#previous-city-list').show();
     
     $('#future-weather2').empty();
 
@@ -80,17 +86,32 @@ function setLocalStorage(name, data) {
 };
 
 function renderLocalStorage() {
-    $('#searched-cities').empty();
     var storedSearches = JSON.parse(localStorage.getItem('previousSearches'));
-    storedSearches.forEach((city) => {
-        var searchList = $('<li>').text(city);
-        console.log(searchList);
-        $('#searched-cities').append(searchList);
-    })    
+    $('#searched-cities').empty()
+    if (storedSearches === null) {
+        return;
+    } else {
+        storedSearches.reverse().forEach((city) => {
+            var searchList = $('<button>').attr('class', 'cityButton').click(function() {getWeatherInfo(city)}).text(city);
+            $('#searched-cities').append(searchList);
+        })
+    };
 };
 
 function clearLocalStorage() {
     localStorage.removeItem('previousSearches');
+};
+
+function loadPageWeather() {
+    var storedSearches = JSON.parse(localStorage.getItem('previousSearches'));
+    if (storedSearches === null) {
+        $('.forecast-container').hide();
+        return;
+    } else {
+        var storedSearchesReverse = storedSearches.reverse();
+        var lastSearchedCity = storedSearchesReverse[0];
+        getWeatherInfo(lastSearchedCity);
+    }
 };
 
 
@@ -103,10 +124,11 @@ $('#search').on('click', function searchWeather(event){
     getWeatherInfo(citySearch);
     setLocalStorage('previousSearches', citySearch);
     renderLocalStorage();
-    }
+    };
 });
 
 $('#clear').on('click', function clearSearchItems(event){
     event.preventDefault();
     clearLocalStorage();
+    renderLocalStorage();
 });
