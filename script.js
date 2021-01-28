@@ -55,7 +55,14 @@ function getWeatherInfo(city) {
             console.log(response);
 
             var UVI = response.current.uvi;
-            $('#uv-index').text('UV Index: ' + UVI);
+            
+            if (0 < UVI && UVI < 3) {
+                $('#uv-index').text('UV Index: ' + UVI).css('color', 'green');
+            } else if (3 < UVI && UVI < 7) {
+                $('#uv-index').text('UV Index: ' + UVI).css('color', 'orange');
+            } else if (7 < UVI) {
+                $('#uv-index').text('UV Index: ' + UVI).css('color', 'red');
+            }
             
             for (let i = 1; i < 6; i++) {
                 const card = $('<div>').attr('class', 'card');
